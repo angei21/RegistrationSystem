@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rs.mapper.TteamMapper" >
+  <resultMap id="BaseResultMap" type="com.rs.pojo.Tteam" >
+    <id column="teamid" property="teamid" jdbcType="BIGINT" />
+    <result column="sno" property="sno" jdbcType="BIGINT" />
+    <result column="headname" property="headname" jdbcType="VARCHAR" />
+    <result column="headclass" property="headclass" jdbcType="VARCHAR" />
+    <result column="headtel" property="headtel" jdbcType="VARCHAR" />
+    <result column="onename" property="onename" jdbcType="VARCHAR" />
+    <result column="oneclass" property="oneclass" jdbcType="VARCHAR" />
+    <result column="onephone" property="onephone" jdbcType="VARCHAR" />
+    <result column="twoname" property="twoname" jdbcType="VARCHAR" />
+    <result column="twoclass" property="twoclass" jdbcType="VARCHAR" />
+    <result column="twophone" property="twophone" jdbcType="VARCHAR" />
+    <result column="threename" property="threename" jdbcType="VARCHAR" />
+    <result column="threeclass" property="threeclass" jdbcType="VARCHAR" />
+    <result column="threephone" property="threephone" jdbcType="VARCHAR" />
+    <result column="fourname" property="fourname" jdbcType="VARCHAR" />
+    <result column="fourclass" property="fourclass" jdbcType="VARCHAR" />
+    <result column="fourphone" property="fourphone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    teamid, sno, headname, headclass, headtel, onename, oneclass, onephone, twoname, 
+    twoclass, twophone, threename, threeclass, threephone, fourname, fourclass, fourphone
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rs.pojo.TteamExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tteam
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <!--  -->
+ 
+  <select id="selectThroughPage" resultMap="BaseResultMap">
+    SELECT * FROM `tteam` LIMIT  #{0}, #{1}
+  </select>
+  
+  <!--  -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tteam
+    where teamid = #{teamid,jdbcType=BIGINT}
+  </select>
+  <!--  -->
+  <select id="selectBySno" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tteam
+    where sno = #{sno,jdbcType=BIGINT}
+  </select>
+  <!--  -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tteam
+    where teamid = #{teamid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rs.pojo.TteamExample" >
+    delete from tteam
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rs.pojo.Tteam" >
+    insert into tteam (teamid, sno, headname, 
+      headclass, headtel, onename, 
+      oneclass, onephone, twoname, 
+      twoclass, twophone, threename, 
+      threeclass, threephone, fourname, 
+      fourclass, fourphone)
+    values (#{teamid,jdbcType=BIGINT}, #{sno,jdbcType=BIGINT}, #{headname,jdbcType=VARCHAR}, 
+      #{headclass,jdbcType=VARCHAR}, #{headtel,jdbcType=VARCHAR}, #{onename,jdbcType=VARCHAR}, 
+      #{oneclass,jdbcType=VARCHAR}, #{onephone,jdbcType=VARCHAR}, #{twoname,jdbcType=VARCHAR}, 
+      #{twoclass,jdbcType=VARCHAR}, #{twophone,jdbcType=VARCHAR}, #{threename,jdbcType=VARCHAR}, 
+      #{threeclass,jdbcType=VARCHAR}, #{threephone,jdbcType=VARCHAR}, #{fourname,jdbcType=VARCHAR}, 
+      #{fourclass,jdbcType=VARCHAR}, #{fourphone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rs.pojo.Tteam" >
+    insert into tteam
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teamid != null" >
+        teamid,
+      </if>
+      <if test="sno != null" >
+        sno,
+      </if>
+      <if test="headname != null" >
+        headname,
+      </if>
+      <if test="headclass != null" >
+        headclass,
+      </if>
+      <if test="headtel != null" >
+        headtel,
+      </if>
+      <if test="onename != null" >
+        onename,
+      </if>
+      <if test="oneclass != null" >
+        oneclass,
+      </if>
+      <if test="onephone != null" >
+        onephone,
+      </if>
+      <if test="twoname != null" >
+        twoname,
+      </if>
+      <if test="twoclass != null" >
+        twoclass,
+      </if>
+      <if test="twophone != null" >
+        twophone,
+      </if>
+      <if test="threename != null" >
+        threename,
+      </if>
+      <if test="threeclass != null" >
+        threeclass,
+      </if>
+      <if test="threephone != null" >
+        threephone,
+      </if>
+      <if test="fourname != null" >
+        fourname,
+      </if>
+      <if test="fourclass != null" >
+        fourclass,
+      </if>
+      <if test="fourphone != null" >
+        fourphone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teamid != null" >
+        #{teamid,jdbcType=BIGINT},
+      </if>
+      <if test="sno != null" >
+        #{sno,jdbcType=BIGINT},
+      </if>
+      <if test="headname != null" >
+        #{headname,jdbcType=VARCHAR},
+      </if>
+      <if test="headclass != null" >
+        #{headclass,jdbcType=VARCHAR},
+      </if>
+      <if test="headtel != null" >
+        #{headtel,jdbcType=VARCHAR},
+      </if>
+      <if test="onename != null" >
+        #{onename,jdbcType=VARCHAR},
+      </if>
+      <if test="oneclass != null" >
+        #{oneclass,jdbcType=VARCHAR},
+      </if>
+      <if test="onephone != null" >
+        #{onephone,jdbcType=VARCHAR},
+      </if>
+      <if test="twoname != null" >
+        #{twoname,jdbcType=VARCHAR},
+      </if>
+      <if test="twoclass != null" >
+        #{twoclass,jdbcType=VARCHAR},
+      </if>
+      <if test="twophone != null" >
+        #{twophone,jdbcType=VARCHAR},
+      </if>
+      <if test="threename != null" >
+        #{threename,jdbcType=VARCHAR},
+      </if>
+      <if test="threeclass != null" >
+        #{threeclass,jdbcType=VARCHAR},
+      </if>
+      <if test="threephone != null" >
+        #{threephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fourname != null" >
+        #{fourname,jdbcType=VARCHAR},
+      </if>
+      <if test="fourclass != null" >
+        #{fourclass,jdbcType=VARCHAR},
+      </if>
+      <if test="fourphone != null" >
+        #{fourphone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rs.pojo.TteamExample" resultType="java.lang.Integer" >
+    select count(*) from tteam
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tteam
+    <set >
+      <if test="record.teamid != null" >
+        teamid = #{record.teamid,jdbcType=BIGINT},
+      </if>
+      <if test="record.sno != null" >
+        sno = #{record.sno,jdbcType=BIGINT},
+      </if>
+      <if test="record.headname != null" >
+        headname = #{record.headname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headclass != null" >
+        headclass = #{record.headclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headtel != null" >
+        headtel = #{record.headtel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onename != null" >
+        onename = #{record.onename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oneclass != null" >
+        oneclass = #{record.oneclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onephone != null" >
+        onephone = #{record.onephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.twoname != null" >
+        twoname = #{record.twoname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.twoclass != null" >
+        twoclass = #{record.twoclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.twophone != null" >
+        twophone = #{record.twophone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threename != null" >
+        threename = #{record.threename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threeclass != null" >
+        threeclass = #{record.threeclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.threephone != null" >
+        threephone = #{record.threephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fourname != null" >
+        fourname = #{record.fourname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fourclass != null" >
+        fourclass = #{record.fourclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fourphone != null" >
+        fourphone = #{record.fourphone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tteam
+    set teamid = #{record.teamid,jdbcType=BIGINT},
+      sno = #{record.sno,jdbcType=BIGINT},
+      headname = #{record.headname,jdbcType=VARCHAR},
+      headclass = #{record.headclass,jdbcType=VARCHAR},
+      headtel = #{record.headtel,jdbcType=VARCHAR},
+      onename = #{record.onename,jdbcType=VARCHAR},
+      oneclass = #{record.oneclass,jdbcType=VARCHAR},
+      onephone = #{record.onephone,jdbcType=VARCHAR},
+      twoname = #{record.twoname,jdbcType=VARCHAR},
+      twoclass = #{record.twoclass,jdbcType=VARCHAR},
+      twophone = #{record.twophone,jdbcType=VARCHAR},
+      threename = #{record.threename,jdbcType=VARCHAR},
+      threeclass = #{record.threeclass,jdbcType=VARCHAR},
+      threephone = #{record.threephone,jdbcType=VARCHAR},
+      fourname = #{record.fourname,jdbcType=VARCHAR},
+      fourclass = #{record.fourclass,jdbcType=VARCHAR},
+      fourphone = #{record.fourphone,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rs.pojo.Tteam" >
+    update tteam
+    <set >
+      <if test="sno != null" >
+        sno = #{sno,jdbcType=BIGINT},
+      </if>
+      <if test="headname != null" >
+        headname = #{headname,jdbcType=VARCHAR},
+      </if>
+      <if test="headclass != null" >
+        headclass = #{headclass,jdbcType=VARCHAR},
+      </if>
+      <if test="headtel != null" >
+        headtel = #{headtel,jdbcType=VARCHAR},
+      </if>
+      <if test="onename != null" >
+        onename = #{onename,jdbcType=VARCHAR},
+      </if>
+      <if test="oneclass != null" >
+        oneclass = #{oneclass,jdbcType=VARCHAR},
+      </if>
+      <if test="onephone != null" >
+        onephone = #{onephone,jdbcType=VARCHAR},
+      </if>
+      <if test="twoname != null" >
+        twoname = #{twoname,jdbcType=VARCHAR},
+      </if>
+      <if test="twoclass != null" >
+        twoclass = #{twoclass,jdbcType=VARCHAR},
+      </if>
+      <if test="twophone != null" >
+        twophone = #{twophone,jdbcType=VARCHAR},
+      </if>
+      <if test="threename != null" >
+        threename = #{threename,jdbcType=VARCHAR},
+      </if>
+      <if test="threeclass != null" >
+        threeclass = #{threeclass,jdbcType=VARCHAR},
+      </if>
+      <if test="threephone != null" >
+        threephone = #{threephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fourname != null" >
+        fourname = #{fourname,jdbcType=VARCHAR},
+      </if>
+      <if test="fourclass != null" >
+        fourclass = #{fourclass,jdbcType=VARCHAR},
+      </if>
+      <if test="fourphone != null" >
+        fourphone = #{fourphone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where teamid = #{teamid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rs.pojo.Tteam" >
+    update tteam
+    set sno = #{sno,jdbcType=BIGINT},
+      headname = #{headname,jdbcType=VARCHAR},
+      headclass = #{headclass,jdbcType=VARCHAR},
+      headtel = #{headtel,jdbcType=VARCHAR},
+      onename = #{onename,jdbcType=VARCHAR},
+      oneclass = #{oneclass,jdbcType=VARCHAR},
+      onephone = #{onephone,jdbcType=VARCHAR},
+      twoname = #{twoname,jdbcType=VARCHAR},
+      twoclass = #{twoclass,jdbcType=VARCHAR},
+      twophone = #{twophone,jdbcType=VARCHAR},
+      threename = #{threename,jdbcType=VARCHAR},
+      threeclass = #{threeclass,jdbcType=VARCHAR},
+      threephone = #{threephone,jdbcType=VARCHAR},
+      fourname = #{fourname,jdbcType=VARCHAR},
+      fourclass = #{fourclass,jdbcType=VARCHAR},
+      fourphone = #{fourphone,jdbcType=VARCHAR}
+    where teamid = #{teamid,jdbcType=BIGINT}
+  </update>
+</mapper>

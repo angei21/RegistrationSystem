@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rs.mapper.TsubmitworksMapper" >
+  <resultMap id="BaseResultMap" type="com.rs.pojo.Tsubmitworks" >
+    <id column="wid" property="wid" jdbcType="BIGINT" />
+    <result column="teamid" property="teamid" jdbcType="BIGINT" />
+    <result column="tmid" property="tmid" jdbcType="BIGINT" />
+    <result column="workname" property="workname" jdbcType="VARCHAR" />
+    <result column="firstwriter" property="firstwriter" jdbcType="VARCHAR" />
+    <result column="sno" property="sno" jdbcType="BIGINT" />
+    <result column="submitpath" property="submitpath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    wid, teamid, tmid, workname, firstwriter, sno, submitpath
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rs.pojo.TsubmitworksExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tsubmitworks
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tsubmitworks
+    where wid = #{wid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tsubmitworks
+    where wid = #{wid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rs.pojo.TsubmitworksExample" >
+    delete from tsubmitworks
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rs.pojo.Tsubmitworks" >
+    insert into tsubmitworks (wid, teamid, tmid, 
+      workname, firstwriter, sno, 
+      submitpath)
+    values (#{wid,jdbcType=BIGINT}, #{teamid,jdbcType=BIGINT}, #{tmid,jdbcType=BIGINT}, 
+      #{workname,jdbcType=VARCHAR}, #{firstwriter,jdbcType=VARCHAR}, #{sno,jdbcType=BIGINT}, 
+      #{submitpath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rs.pojo.Tsubmitworks" >
+    insert into tsubmitworks
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        wid,
+      </if>
+      <if test="teamid != null" >
+        teamid,
+      </if>
+      <if test="tmid != null" >
+        tmid,
+      </if>
+      <if test="workname != null" >
+        workname,
+      </if>
+      <if test="firstwriter != null" >
+        firstwriter,
+      </if>
+      <if test="sno != null" >
+        sno,
+      </if>
+      <if test="submitpath != null" >
+        submitpath,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=BIGINT},
+      </if>
+      <if test="teamid != null" >
+        #{teamid,jdbcType=BIGINT},
+      </if>
+      <if test="tmid != null" >
+        #{tmid,jdbcType=BIGINT},
+      </if>
+      <if test="workname != null" >
+        #{workname,jdbcType=VARCHAR},
+      </if>
+      <if test="firstwriter != null" >
+        #{firstwriter,jdbcType=VARCHAR},
+      </if>
+      <if test="sno != null" >
+        #{sno,jdbcType=BIGINT},
+      </if>
+      <if test="submitpath != null" >
+        #{submitpath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rs.pojo.TsubmitworksExample" resultType="java.lang.Integer" >
+    select count(*) from tsubmitworks
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tsubmitworks
+    <set >
+      <if test="record.wid != null" >
+        wid = #{record.wid,jdbcType=BIGINT},
+      </if>
+      <if test="record.teamid != null" >
+        teamid = #{record.teamid,jdbcType=BIGINT},
+      </if>
+      <if test="record.tmid != null" >
+        tmid = #{record.tmid,jdbcType=BIGINT},
+      </if>
+      <if test="record.workname != null" >
+        workname = #{record.workname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstwriter != null" >
+        firstwriter = #{record.firstwriter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sno != null" >
+        sno = #{record.sno,jdbcType=BIGINT},
+      </if>
+      <if test="record.submitpath != null" >
+        submitpath = #{record.submitpath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tsubmitworks
+    set wid = #{record.wid,jdbcType=BIGINT},
+      teamid = #{record.teamid,jdbcType=BIGINT},
+      tmid = #{record.tmid,jdbcType=BIGINT},
+      workname = #{record.workname,jdbcType=VARCHAR},
+      firstwriter = #{record.firstwriter,jdbcType=VARCHAR},
+      sno = #{record.sno,jdbcType=BIGINT},
+      submitpath = #{record.submitpath,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rs.pojo.Tsubmitworks" >
+    update tsubmitworks
+    <set >
+      <if test="teamid != null" >
+        teamid = #{teamid,jdbcType=BIGINT},
+      </if>
+      <if test="tmid != null" >
+        tmid = #{tmid,jdbcType=BIGINT},
+      </if>
+      <if test="workname != null" >
+        workname = #{workname,jdbcType=VARCHAR},
+      </if>
+      <if test="firstwriter != null" >
+        firstwriter = #{firstwriter,jdbcType=VARCHAR},
+      </if>
+      <if test="sno != null" >
+        sno = #{sno,jdbcType=BIGINT},
+      </if>
+      <if test="submitpath != null" >
+        submitpath = #{submitpath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wid = #{wid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rs.pojo.Tsubmitworks" >
+    update tsubmitworks
+    set teamid = #{teamid,jdbcType=BIGINT},
+      tmid = #{tmid,jdbcType=BIGINT},
+      workname = #{workname,jdbcType=VARCHAR},
+      firstwriter = #{firstwriter,jdbcType=VARCHAR},
+      sno = #{sno,jdbcType=BIGINT},
+      submitpath = #{submitpath,jdbcType=VARCHAR}
+    where wid = #{wid,jdbcType=BIGINT}
+  </update>
+</mapper>

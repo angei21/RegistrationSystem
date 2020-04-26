@@ -1,0 +1,14 @@
+com\rs\serviceImpl\tuserServiceImpl.class
+com\rs\serviceImpl\documentServiceImpl.class
+com\rs\serviceImpl\scoreServiceImpl.class
+com\rs\serviceImpl\submitServiceImpl.class
+com\rs\serviceImpl\tteamServiceImpl.class
+com\rs\service\tuserService.class
+com\rs\service\tmatchTypeService.class
+com\rs\service\scoreService.class
+com\rs\service\tteamService.class
+com\rs\serviceImpl\pageServiceImpl.class
+com\rs\serviceImpl\tmatchTypeServiceImpl.class
+com\rs\service\documentService.class
+com\rs\service\pageService.class
+com\rs\service\submitService.class
